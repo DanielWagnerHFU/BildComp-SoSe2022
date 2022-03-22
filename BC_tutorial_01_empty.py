@@ -1,21 +1,21 @@
-# TODO first step is to import the opencv module which is called 'cv2'
+from multiprocessing.connection import wait
+import cv2
+from cv2 import imshow
+from numpy import imag
 
-# TODO check the opencv version
+print(cv2.__version__)
 
-# TODO load an image with image reading modes using 'imread'
-# cv2.IMREAD_UNCHANGED  - If set, return the loaded image as is (with alpha
-#                         channel, otherwise it gets cropped). Ignore EXIF
-#                         orientation.
-# cv2.IMREAD_GRAYSCALE  - If set, always convert image to the single channel
-#                         grayscale image (codec internal conversion).
-# cv2.IMREAD_COLOR      - If set, always convert image to the 3 channel BGR
-#                         color image.
+image = cv2.imread('images/logo.png', cv2.IMREAD_UNCHANGED)
+imshow("image", image)
 
+image_resized = cv2.resize(image, (100, 200), interpolation = cv2.INTER_AREA)
+imshow("image_resized", image_resized)
 
-# TODO resize image with 'resize'
+image_rotated = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+imshow("image_rotated", image_rotated)
 
-# TODO rotate image (but keep it rectangular) with 'rotate'
+path = "images/testimage.png"
+cv2.imwrite(path, image_rotated)
 
-# TODO save image with 'imwrite'
-
-# TODO show the image with 'imshow'
+cv2.waitKey(0)
+cv2.destroyAllWindows()
